@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bill of Lading</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8f9fa; }
+        .container { background: #fff; padding: 32px; border-radius: 8px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 15px rgba(0,0,0,0.08); }
+        .logo { text-align: center; margin-bottom: 20px; }
+        .logo img { height: 60px; }
+        h1 { color: #0056b3; text-align: center; margin-bottom: 0; }
+        .section { margin-bottom: 24px; }
+        .section-title { background: #e9ecef; color: #495057; padding: 8px 16px; border-radius: 5px; font-weight: bold; border-left: 5px solid #007bff; margin-bottom: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+        th, td { border: 1px solid #dee2e6; padding: 8px; text-align: left; }
+        th { background: #f1f3f4; }
+        .badge { display: inline-block; padding: 0.35em 0.65em; font-size: 0.9em; border-radius: 0.25rem; background: #007bff; color: #fff; }
+        .footer { text-align: right; font-size: 0.9em; color: #888; margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logo_2013_Google.png/320px-Logo_2013_Google.png" alt="Logo Naviera" />
+        </div>
+        <h1>Bill of Lading</h1>
+        <div class="section">
+            <div class="section-title">Datos Generales</div>
+            <table>
+                <tr><th>Número de BL</th><td>{{ instruccion.id }}</td></tr>
+                <tr><th>Fecha de Creación</th><td>{{ instruccion.fecha_creacion|date:"d/m/Y" }}</td></tr>
+                <tr><th>Número de Booking</th><td>{{ instruccion.numero_booking|default:"N/A" }}</td></tr>
+                <tr><th>Número de Contenedor</th><td>{{ instruccion.numero_contenedor|default:"N/A" }}</td></tr>
+                <tr><th>Estado</th><td><span class="badge">{{ instruccion.estado|default:"N/A" }}</span></td></tr>
+            </table>
+        </div>
+        <div class="section">
+            <div class="section-title">Partes Involucradas</div>
+            <table>
+                <tr><th>Exportador</th><td>{{ instruccion.exportador|default:"N/A" }}</td></tr>
+                <tr><th>Consignatario</th><td>{{ instruccion.consignatario|default:"N/A" }}</td></tr>
+                <tr><th>Notificar a</th><td>{{ instruccion.notificar_a|default:"N/A" }}</td></tr>
+            </table>
+        </div>
+        <div class="section">
+            <div class="section-title">Ruta</div>
+            <table>
+                <tr><th>Puerto de Embarque</th><td>{{ instruccion.puerto_embarque|default:"N/A" }}</td></tr>
+                <tr><th>Puerto de Destino</th><td>{{ instruccion.puerto_destino|default:"N/A" }}</td></tr>
+            </table>
+        </div>
+        <div class="section">
+            <div class="section-title">Descripción de la Carga</div>
+            <table>
+                <tr><th>Descripción</th><td>{{ instruccion.descripcion_carga|default:"N/A" }}</td></tr>
+            </table>
+        </div>
+        <div class="section">
+            <div class="section-title">Instrucciones Especiales</div>
+            <div style="border:1px solid #dee2e6; border-radius:4px; padding:12px; min-height:40px;">{{ instruccion.instrucciones_especiales|default:"No hay instrucciones especiales." }}</div>
+        </div>
+        <div class="footer">
+            Documento generado el {{ fecha_actual|date:"d/m/Y H:i" }}
+        </div>
+    </div>
+</body>
+</html> 
